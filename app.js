@@ -30,7 +30,7 @@ mongoose.connect('mongodb://localhost/test');
 
 
 var UserSchema= mongoose.Schema({
-  email: String,
+  email: {type: String, unique: true},
   freetimestart: Number,
   freetimeend: Number,
   todos: [{
@@ -68,12 +68,22 @@ app.get("/oauthcallback", function(req, res){
       req.session.email = uinfo.email;
       req.session.tokens = tokens;
 
-      var user = new User({email:uinfo.email});
-      user.save(function(err,user) {
-        if(err){
-          console.log(err);
+      User.findOne({email: uinfo.email}, function(err, user){
+        if(!user){
+          var user = new User({email:uinfo.email});
+          user.save(function(err,user) {
+            if(err){
+              console.log(err);
+            }
+            console.log("new"+user);
+          });
         }
+
+        console.log("old"+user)
+
       });
+
+
       res.redirect("/");
     })
   });
