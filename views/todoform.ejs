@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Add your tasks</title>
+  </head>
+  <body>
+
+    <form method=post>
+      <input type="text" name="todo"/>
+      <input type="submit"/>
+    </form>
+
+    <% for(i=0; i<todos.length;i++){ %>
+      <%= todos[i] %>
+
+    <% } %>
+  </body>
+</html>

@@ -91,6 +91,13 @@ app.get("/oauthcallback", function(req, res){
 
 });
 
+app.get("/todos", function(req, res){
+  User.findOne({email: req.session.email}, function(err, user){
+    res.render("todoform.ejs", {todos: user.todos});
+  })
+
+});
+
 
 
 app.get("/schedule", function(req, res){

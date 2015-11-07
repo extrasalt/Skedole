@@ -5,16 +5,16 @@
   "author": "Mohanarangan Muthukumar <mohan@extrasalt.org>",
   "main": "./app.js",
   "dependencies": {
-    "express": "4.x.x",
-    "googleapis": "*",
-    "mongoose": "*",
-    "cookie-parser": "*",
     "body-parser": "*",
-    "express-session":"*"
+    "cookie-parser": "*",
+    "ejs": "^2.3.4",
+    "express": "4.x.x",
+    "express-session": "*",
+    "googleapis": "*",
+    "mongoose": "*"
   },
   "scripts": {
     "start": "node app.js",
     "postinstall": "node scripts/postinstall.js"
   }
-
 }
