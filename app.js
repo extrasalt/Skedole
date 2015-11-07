@@ -74,8 +74,11 @@ app.get("/oauthcallback", function(req, res){
 
 
 app.get("/schedule", function(req, res){
-  console.log(req.session.email);
-  res.send("GET schedule");
+  oauth2Client.setCredentials(req.session.tokens);
+  authinfo.userinfo.get({fields: "email", auth:oauth2Client }, function(err, uinfo){
+    console.log(req.session.email);
+    res.send(uinfo.email);
+  });
 });
 
 app.post("/schedule", function(req, res){
