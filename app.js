@@ -138,7 +138,7 @@ app.post("/schedule", function(req, res){
       'dateTime': datetime,
     },
     'end': {
-      'dateTime': '2015-11-19T10:00:00-07:00'
+      'dateTime': thirtyminslater(datetime),
     },
   }
 
@@ -176,4 +176,24 @@ function generateDate(){
   t.randomDay = Math.round(t.d + Math.random()*6);
   t.randomHour = Math.round(Math.random()*20 - 8)
   return new Date(t.y, t.m, t.randomDay, t.randomHour, 00, 00);
+}
+
+function thirtyminslater(date){
+  var now = new Date(date);
+
+  var hour = now.getHours();
+  var minutes = now.getMinutes();
+
+  if(minutes == 30){
+    minutes = 0;
+    hour+=1;
+  } else {
+    minutes+=30;
+  }
+
+  var then = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes, 00, now.getTimezoneOffset())
+  return then.toISOString();
+
+
+
 }
