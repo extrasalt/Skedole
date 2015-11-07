@@ -1,4 +1,6 @@
 var express = require('express');
+var google = require('googleapis');
+var mongoose = require('mongoose');
 var app = express();
 
 //Create a static file server
@@ -6,9 +8,20 @@ app.configure(function() {
   app.use(express.static(__dirname + '/public'));
 });
 
-//Get the dummy data
-require('./server/ddata.js');
 
 var port = 8080;
 app.listen(port);
+
+app.get("/schedule", function(req, res){
+  res.send("GET schedule");
+});
+
+app.post("/schedule", function(req, res){
+  res.send("POST schedule");
+});
+
+
+
+
+
 console.log('Express server started on port %s', port);

@@ -5,7 +5,9 @@
   "author": "Mohanarangan Muthukumar <mohan@extrasalt.org>",
   "main": "./app.js",
   "dependencies": {
-    "express": "3.x.x"
+    "express": "4.x.x",
+    "googleapis": "*",
+    "mongoose": "*"
   },
   "scripts": {
     "start": "node app.js",
