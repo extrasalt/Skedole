@@ -1,0 +1,22 @@
+<html>
+<head>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <title>
+    Schedule your tasks
+  </title>
+  <body>
+    <%= todos.shift() %>
+    <div class="option" id="left"><%=dgen()%></div>
+    <div class="option" id="right"><%=dgen()%></div>
+  </body>
+  <script type="text/javascript">
+    $(function(){
+      $(".option").click(function(){
+        var date = new Date($(this).text());
+        console.log(date.toISOString());
+      })
+
+    })
+  </script>
+</head>
+</html>

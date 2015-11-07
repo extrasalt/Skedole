@@ -117,11 +117,13 @@ app.post("/updateTodos", function(req, res){
 
 
 app.get("/schedule", function(req, res){
-  oauth2Client.setCredentials(req.session.tokens);
-  authinfo.userinfo.get({fields: "email", auth:oauth2Client }, function(err, uinfo){
-    console.log(req.session.email);
-    res.send(uinfo.email);
-  });
+  User.findOne({email: req.session.email}, function(err, user){
+    var todos = user.todos;
+    res.render("schedulepage.ejs", {todos:todos, dgen: generateDate})
+  })
+
+
+
 });
 
 app.post("/schedule", function(req, res){
