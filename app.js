@@ -175,6 +175,5 @@ function generateDate(){
 
   t.randomDay = Math.round(t.d + Math.random()*6);
   t.randomHour = Math.round(Math.random()*20 - 8)
-  console.log(t)
   return new Date(t.y, t.m, t.randomDay, t.randomHour, 00, 00);
 }
