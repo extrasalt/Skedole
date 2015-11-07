@@ -9,9 +9,9 @@
       <input type="submit"/>
     </form>
 
-    <% for(i=0; i<todos.length;i++){ %>
-      <%= todos[i] %>
+    <% user.todos.forEach(function(todo){ %>
+      <%= todo %>
 
-    <% } %>
+    <% }) %>
   </body>
 </html>

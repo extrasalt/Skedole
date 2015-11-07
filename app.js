@@ -18,6 +18,7 @@ app.use(session({
 }));
 
 app.use(cookieParser("hello"));
+app.use(bodyParser({extended: true}));
 
 var OAuth2Client = google.auth.OAuth2;
 
@@ -33,12 +34,7 @@ var UserSchema= mongoose.Schema({
   email: {type: String, unique: true},
   freetimestart: Number,
   freetimeend: Number,
-  todos: [{
-    title: String,
-    slots: Number,
-    optionone: Number,
-    optiontwo: Number
-  }]
+  todos: [String]
 });
 
 var User = mongoose.model("User", UserSchema);
@@ -93,10 +89,28 @@ app.get("/oauthcallback", function(req, res){
 
 app.get("/todos", function(req, res){
   User.findOne({email: req.session.email}, function(err, user){
-    res.render("todoform.ejs", {todos: user.todos});
+    res.render("todoform.ejs", {user: user});
+    console.log(user)
   })
 
 });
+
+app.post("/todos", function(req, res){
+  var todo = req.body.todo;
+  if(!todo){res.send("Empty")}
+  User.update({email: req.session.email}, {$push: {todos: todo}}, function(err, data){
+    console.log(data);
+
+  })
+  res.redirect("/todos");
+})
+
+app.post("/updateTodos", function(req, res){
+  var todos = req.body.todos.split(',');
+  User.update({email: req.session.email}, {todos: todos}, function(err, data){
+    console.log(data);
+  });
+})
 
 
 
