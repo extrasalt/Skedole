@@ -7,7 +7,9 @@
   "dependencies": {
     "express": "4.x.x",
     "googleapis": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "passport": "*",
+    "passport-google-oauth":"*"
   },
   "scripts": {
     "start": "node app.js",

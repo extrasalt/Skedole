@@ -2,6 +2,8 @@ var express = require('express');
 var google = require('googleapis');
 var mongoose = require('mongoose');
 var cred = require('./credentials.js');
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 
 var app = express();
@@ -9,7 +11,9 @@ var OAuth2Client = google.auth.OAuth2;
 
 var authinfo = google.oauth2('v2');
 
-var oauth2Client = new OAuth2Client(cred.CLIENT_ID, cred.CLIENT_SECRET, "http://localhost:8080/oauthcallback")
+var oauth2Client = new OAuth2Client(cred.CLIENT_ID,
+  cred.CLIENT_SECRET,
+  "http://localhost:8080/oauthcallback")
 
 
 mongoose.connect('mongodb://localhost/test');
@@ -42,12 +46,10 @@ res.send(url);
 app.get("/oauthcallback", function(req, res){
   var code = req.query.code;
 
-  console.log(code);
-
   oauth2Client.getToken(code, function(err, tokens){
     oauth2Client.setCredentials(tokens);
     authinfo.userinfo.get({fields: "email", auth:oauth2Client }, function(err, uinfo){
-      console.log(err);
+      console.log(tokens);
       res.send(uinfo.email);
     })
   });
