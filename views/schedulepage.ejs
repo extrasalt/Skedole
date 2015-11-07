@@ -5,15 +5,26 @@
     Schedule your tasks
   </title>
   <body>
-    <%= todos.shift() %>
+    <div id="name"><%= todos.shift()%> </div>
     <div class="option" id="left"><%=dgen()%></div>
     <div class="option" id="right"><%=dgen()%></div>
   </body>
   <script type="text/javascript">
+    var dgen = <%= dgen %>
+    var todos = "<%= todos %>".split(",")
     $(function(){
       $(".option").click(function(){
         var date = new Date($(this).text());
-        console.log(date.toISOString());
+        date = date.toISOString()
+
+        var name = $("#name").text();
+        $.post("/schedule", {summary: name, datetime: date} )
+        .done(function(){
+          $("#name").text(todos.shift());
+          $("#left").text(dgen());
+          $("#right").text(dgen());
+        })
+
       })
 
     })

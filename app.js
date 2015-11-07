@@ -128,11 +128,14 @@ app.get("/schedule", function(req, res){
 
 app.post("/schedule", function(req, res){
 
+  var summary = req.body.summary;
+  var datetime = req.body.datetime;
+
   oauth2Client.setCredentials(req.session.tokens);
   var event = {
-    'summary':  "Mohan's awesome event", //req.body.title
+    'summary':  summary,
     'start': {
-      'dateTime': '2015-11-19T09:00:00-07:00',
+      'dateTime': datetime,
     },
     'end': {
       'dateTime': '2015-11-19T10:00:00-07:00'
