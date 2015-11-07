@@ -5,7 +5,7 @@ var cred = require('./credentials.js');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-
+mongoose.connect('mongodb://localhost/test');
 var app = express();
 var OAuth2Client = google.auth.OAuth2;
 
@@ -16,20 +16,8 @@ var oauth2Client = new OAuth2Client(cred.CLIENT_ID,
   "http://localhost:8080/oauthcallback")
 
 
-mongoose.connect('mongodb://localhost/test');
 
 
-var UserSchema = new mongoose.Schema({
-  email: String,
-  freetimestart: Number,
-  freetimeend: Number,
-  todos: [{
-    title: String,
-    slots: Number,
-    optionone: Number,
-    optiontwo: Number
-  }]
-});
 
 app.get("/", function(req, res){
 var url = oauth2Client.generateAuthUrl({
@@ -55,16 +43,6 @@ app.get("/oauthcallback", function(req, res){
   });
 
 
-});
-
-
-
-app.get("/schedule", function(req, res){
-  res.send("GET schedule");
-});
-
-app.post("/schedule", function(req, res){
-  res.send("POST schedule");
 });
 
 
