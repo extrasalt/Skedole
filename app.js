@@ -3,8 +3,22 @@ var google = require('googleapis');
 var mongoose = require('mongoose');
 var cred = require('./credentials.js');
 
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+
+
 
 var app = express();
+app.use(session({
+  secret: "hello",
+  resave: true,
+  saveUninitialized: false
+}));
+
+app.use(cookieParser("hello"));
+
 var OAuth2Client = google.auth.OAuth2;
 
 var authinfo = google.oauth2('v2');
@@ -47,6 +61,8 @@ app.get("/oauthcallback", function(req, res){
   oauth2Client.getToken(code, function(err, tokens){
     oauth2Client.setCredentials(tokens);
     authinfo.userinfo.get({fields: "email", auth:oauth2Client }, function(err, uinfo){
+      req.session.email = uinfo.email;
+      req.session.tokens = tokens;
       console.log(err);
       res.send(uinfo.email);
     })
@@ -58,6 +74,7 @@ app.get("/oauthcallback", function(req, res){
 
 
 app.get("/schedule", function(req, res){
+  console.log(req.session.email);
   res.send("GET schedule");
 });
 
