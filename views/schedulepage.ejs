@@ -22,8 +22,10 @@
         .done(function(){
           if(todos.length <= 0) {
             $('body').text("Amazing! Done!");
+
             return;
           }
+          $.post("/updateTodos", {todos: todos});
           $("#name").text(todos.shift());
           $("#left").text(dgen());
           $("#right").text(dgen());
