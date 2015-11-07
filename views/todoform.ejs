@@ -8,10 +8,11 @@
       <input type="text" name="todo"/>
       <input type="submit"/>
     </form>
-
+    <% if(user.todos) { %>
     <% user.todos.forEach(function(todo){ %>
       <%= todo %>
 
     <% }) %>
+    <% } %>
   </body>
 </html>

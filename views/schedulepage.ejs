@@ -5,10 +5,18 @@
     Schedule your tasks
   </title>
   <body>
+    <% if(todos) { %>
     <div id="name"><%= todos.shift()%> </div>
     <div class="option" id="left"><%=dgen()%></div>
     <div class="option" id="right"><%=dgen()%></div>
+    <% } else { %>
+      <p> Add tasks first! </p>
+    <% } %>
   </body>
+
+
+  <!-- Load only if todos is greater than zero! -->
+  <% if(todos) { %>
   <script type="text/javascript">
     var dgen = <%= dgen %>
     var todos = "<%= todos %>".split(",")
@@ -35,5 +43,6 @@
 
     })
   </script>
+  <% } %>
 </head>
 </html>
