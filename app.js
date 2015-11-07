@@ -3,7 +3,24 @@ var google = require('googleapis');
 var mongoose = require('mongoose');
 var app = express();
 
-//Create a static file server
+
+mongoose.connect('mongodb://localhost/test');
+
+
+var UserSchema = new mongoose.Schema({
+  email: String,
+  freetimestart: Number,
+  freetimeend: Number,
+  todos: [{
+    title: String,
+    slots: Number,
+    optionone: Number,
+    optiontwo: Number
+  }]
+});
+
+
+
 app.configure(function() {
   app.use(express.static(__dirname + '/public'));
 });
