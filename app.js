@@ -23,6 +23,7 @@ app.use(bodyParser({extended: true}));
 var OAuth2Client = google.auth.OAuth2;
 
 var authinfo = google.oauth2('v2');
+var calendar = google.calendar('v3');
 
 var oauth2Client = new OAuth2Client(cred.CLIENT_ID, cred.CLIENT_SECRET, "http://localhost:8080/oauthcallback")
 
@@ -124,7 +125,32 @@ app.get("/schedule", function(req, res){
 });
 
 app.post("/schedule", function(req, res){
-  res.send("POST schedule");
+
+  oauth2Client.setCredentials(req.session.tokens);
+  var event = {
+    'summary':  "Mohan's awesome event", //req.body.title
+    'start': {
+      'dateTime': '2015-11-19T09:00:00-07:00',
+    },
+    'end': {
+      'dateTime': '2015-11-19T10:00:00-07:00'
+    },
+  }
+
+  calendar.events.insert({
+    auth: oauth2Client,
+    calendarId: 'primary',
+    resource: event,
+  }, function(err, event) {
+    if (err) {
+      console.log('There was an error contacting the Calendar service: ' + err);
+      return;
+    }
+    console.log('Event created: %s', event.htmlLink);
+    res.json({"status": "success"});
+  });
+
+
 });
 
 
