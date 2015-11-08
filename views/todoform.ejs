@@ -1,3 +1,4 @@
+
 <html>
   <head>
     <title>Add your tasks</title>
@@ -6,26 +7,82 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <style media="screen">
       body{
-        background: #bdc3c7;
+        background: #e74c3c;
       }
+
+
+
+      #container {
+        padding: 20px;
+
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.6);
+        border-bottom: 3px solid #c0392b;
+        width: 600px;
+        margin: 40px auto;
+      }
+
+      @media (orientation: landscape) {
+        #container:{
+          width: 100%;
+          margin: 0px;
+        }
+      }
+
+      .item{
+        padding: 10px;
+        padding-left: 30px;
+        margin-top:10px;
+        margin-bottom: 10px;
+        display: block;
+        width: auto;
+        height: 30px;
+        background: #fcfcfc;
+        border-bottom: 1px solid #eee;
+        border-radius: 2px;
+
+      }
+
+      a#scheduleButton{
+        display: block;
+        text-decoration: none;
+        color: white
+        height: 30px;
+        padding: 10px;
+        text-align: center;
+        margin: auto ;
+        width: 100px;
+        border-radius: 3px;
+        background: #e74c3c;
+        border-bottom: 2px solid #c0392b;
+      }
+
+      #scheduleButton:visited{
+        color:white;
+        text-decoration: none;
+      }
+
     </style>
   </head>
   <body>
+    <div id="container">
+      <form method=post id="todoForm">
+        <input type="text" name="todo" id="todoBox"/>
+        <input type="submit" id="subButton"/>
+      </form>
+      <div id="todos">
+        <% if(user.todos) { %>
+        <% user.todos.forEach(function(todo){ %>
+          <div class="item"><%= todo %> </div>
 
-    <form method=post id="todoForm">
-      <input type="text" name="todo" id="todoBox"/>
-      <input type="submit" id="subButton"/>
-    </form>
-    <div id="todos">
-      <% if(user.todos) { %>
-      <% user.todos.forEach(function(todo){ %>
-        <%= todo %> <br />
+        <% }) %>
+        <% } %>
+      </div>
 
-      <% }) %>
-      <% } %>
+
+      <a href="/schedule" id="scheduleButton"> Schedule </a>
     </div>
-
-    <a href="/schedule"> Schedule </a>
   </body>
 
   <script type="text/javascript">
@@ -34,7 +91,9 @@
         e.preventDefault();
         var summary = $("#todoForm #todoBox").val();
         $.post("/todos", {todo: summary}).done(function(data){
-            $("#todos").html($(data).filter("#todos").html());
+
+
+            $("#container").html($(data).filter("#container").html());
         })
 
       })
