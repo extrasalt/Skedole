@@ -55,6 +55,10 @@ app.get("/login", function(req, res){
   }
 });
 
+app.get("/", function(req, res){
+  res.send("placeholder");
+})
+
 
 app.get("/oauthcallback", function(req, res){
   var code = req.query.code;
