@@ -56,6 +56,11 @@ app.get("/login", function(req, res){
   }
 });
 
+app.get("/logout", function(req, res){
+  req.session = null ;
+  res.redirect("/")
+})
+
 app.get("/", function(req, res){
   res.send("placeholder");
 })
