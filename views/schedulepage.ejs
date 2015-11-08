@@ -2,6 +2,8 @@
   <head>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js" charset="utf-8"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <style media="screen">
       #container{
@@ -107,5 +109,15 @@
     })
   </script>
   <% } %>
+
+  <script type="text/javascript">
+    Mousetrap.bind("left", function(){
+      $("#left").click();
+    })
+
+    Mousetrap.bind("right", function(){
+      $("#right").click();
+    })
+  </script>
 </body>
 </html>
