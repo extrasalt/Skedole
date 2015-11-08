@@ -25,10 +25,10 @@ var OAuth2Client = google.auth.OAuth2;
 var authinfo = google.oauth2('v2');
 var calendar = google.calendar('v3');
 
-var oauth2Client = new OAuth2Client(cred.CLIENT_ID, cred.CLIENT_SECRET, "http://localhost:8080/oauthcallback")
+var oauth2Client = new OAuth2Client(cred.CLIENT_ID, cred.CLIENT_SECRET, cred.CALLBACK)
 
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(cred.MONGOURL);
 
 
 var UserSchema= mongoose.Schema({
