@@ -109,7 +109,7 @@ app.post("/todos", function(req, res){
 
 app.post("/updateTodos", function(req, res){
   var todos = JSON.parse(req.body.todos);
-  if(todos = [""]) todos = [];
+  if(todos == [""]) todos = [];
 
   User.update({email: req.session.email}, {todos: todos}, function(err, data){
     console.log(data);
