@@ -173,8 +173,8 @@ function generateDate(){
   t.m = now.getMonth();
   t.d = now.getDate();
 
-  t.randomDay = Math.round(t.d + Math.random()*6);
-  t.randomHour = Math.round(Math.random()*20 - 8)
+  t.randomDay = Math.floor(Math.random()*6) + t.d;
+  t.randomHour = Math.floor(Math.random()*12)+ 8;
   return new Date(t.y, t.m, t.randomDay, t.randomHour, 00, 00);
 }
 
