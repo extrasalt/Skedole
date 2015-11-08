@@ -106,7 +106,7 @@
             return;
           }
           $.post("/updateTodos", {todos: JSON.stringify(todos)});
-          $("#name").text(todos.shift());
+          $("#name").hide().text(todos.shift()).fadeIn(600);
           $("#left").text(dgen());
           $("#right").text(dgen());
         })
