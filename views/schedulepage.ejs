@@ -5,7 +5,7 @@
     Schedule your tasks
   </title>
   <body>
-    <% if(todos) { %>
+    <% if(todos.length > 0) { %>
     <div id="name"><%= todos.shift()%> </div>
     <div class="option" id="left"><%=dgen()%></div>
     <div class="option" id="right"><%=dgen()%></div>
@@ -16,7 +16,7 @@
 
 
   <!-- Load only if todos is greater than zero! -->
-  <% if(todos) { %>
+  <% if(todos.length > 0) { %>
   <script type="text/javascript">
     var dgen = <%= dgen %>
     var todos = "<%= todos %>".split(",")
