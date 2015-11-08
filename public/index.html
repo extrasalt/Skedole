@@ -25,6 +25,12 @@
       display: flex;
     }
 
+    @media (orientation:portrait) {
+      #hero{
+      height: 15%;
+      }
+    }
+
     #red{
       flex:1;
       background: #e74c3c;
@@ -55,7 +61,13 @@
       align-items: center;
     }
 
-    
+    iframe{
+      position: absolute;
+      bottom:30px;
+      right:30px;
+    }
+
+
   </style>
 </head>
 <body>
@@ -68,6 +80,9 @@
     </section>
   </div>
   <a href="/login" id="gbutton">Sign in with Google</a>
+
+  <iframe src="http://nodeknockout.com/iframe/imperial-clan" frameborder=0 scrolling=no allowtransparency=true width=115 height=25>
+  </iframe>
 
 
 </body>
