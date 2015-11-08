@@ -40,7 +40,7 @@ var UserSchema= mongoose.Schema({
 
 var User = mongoose.model("User", UserSchema);
 
-app.get("/", function(req, res){
+app.get("/login", function(req, res){
   if(!req.session.email){
     var url = oauth2Client.generateAuthUrl({
       access_type: 'offline',
@@ -51,7 +51,7 @@ app.get("/", function(req, res){
     });
     res.redirect(url);
   } else {
-    res.send("Hello, " + req.session.email);
+    res.send("Logged in as " + req.session.email);
   }
 });
 
@@ -82,14 +82,14 @@ app.get("/oauthcallback", function(req, res){
       });
 
 
-      res.redirect("/");
+      res.redirect("/todos");
     })
   });
 
 
 });
 
-app.get("/todos", function(req, res){
+app.get("/todos", authenticate, function(req, res){
   User.findOne({email: req.session.email}, function(err, user){
     res.render("todoform.ejs", {user: user});
     console.log(user)
@@ -97,7 +97,7 @@ app.get("/todos", function(req, res){
 
 });
 
-app.post("/todos", function(req, res){
+app.post("/todos", authenticate, function(req, res){
   var todo = req.body.todo;
   if(!todo){res.send("Empty")}
   User.update({email: req.session.email}, {$push: {todos: todo}}, function(err, data){
@@ -107,7 +107,7 @@ app.post("/todos", function(req, res){
   res.redirect("/todos");
 })
 
-app.post("/updateTodos", function(req, res){
+app.post("/updateTodos", authenticate, function(req, res){
   var todos = JSON.parse(req.body.todos);
   if(todos == [""]) todos = [];
 
@@ -118,7 +118,7 @@ app.post("/updateTodos", function(req, res){
 
 
 
-app.get("/schedule", function(req, res){
+app.get("/schedule", authenticate, function(req, res){
   User.findOne({email: req.session.email}, function(err, user){
     var todos = user.todos;
     res.render("schedulepage.ejs", {todos:todos, dgen: generateDate})
@@ -128,7 +128,7 @@ app.get("/schedule", function(req, res){
 
 });
 
-app.post("/schedule", function(req, res){
+app.post("/schedule", authenticate, function(req, res){
 
   var summary = req.body.summary;
   var datetime = req.body.datetime;
@@ -197,5 +197,14 @@ function thirtyminslater(date){
   return then.toISOString();
 
 
+
+}
+
+function authenticate(req, res, next){
+  if(!req.session.email){
+    res.redirect("/login");
+  } else {
+    next();
+  }
 
 }
