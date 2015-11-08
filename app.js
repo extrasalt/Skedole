@@ -3,7 +3,7 @@ var google = require('googleapis');
 var mongoose = require('mongoose');
 var cred = require('./credentials.js');
 
-var session = require('express-session');
+var session = require('cookie-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -13,8 +13,7 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(session({
   secret: "hello",
-  resave: true,
-  saveUninitialized: false
+  cookie: { maxAge: 60 * 60 * 1000 }
 }));
 
 app.use(cookieParser("hello"));
@@ -79,16 +78,18 @@ app.get("/oauthcallback", function(req, res){
             if(err){
               console.log(err);
             }
-            console.log("new"+user);
+            console.log("new user");
           });
-        }
+        } else {
 
-        console.log("old"+user)
+        console.log("old user")
+      }
+      res.redirect("/todos");
 
       });
 
 
-      res.redirect("/todos");
+
     })
   });
 
@@ -97,8 +98,9 @@ app.get("/oauthcallback", function(req, res){
 
 app.get("/todos", authenticate, function(req, res){
   User.findOne({email: req.session.email}, function(err, user){
+    if(err) console.log(err);
     res.render("todoform.ejs", {user: user});
-    console.log(user)
+
   })
 
 });
