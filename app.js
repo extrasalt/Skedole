@@ -29,6 +29,8 @@ var oauth2Client = new OAuth2Client(cred.CLIENT_ID, cred.CLIENT_SECRET, cred.CAL
 
 
 mongoose.connect(cred.MONGOURL);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 
 var UserSchema= mongoose.Schema({
