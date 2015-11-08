@@ -44,33 +44,46 @@
 
       }
 
-      a#scheduleButton{
+      .obutton{
+        position: absolute;
+        top:30px;
+        right:30px;
         display: block;
         text-decoration: none;
-        color: white
+        background: white;
         height: 30px;
         padding: 10px;
         text-align: center;
-        margin: auto ;
         width: 100px;
         border-radius: 3px;
-        background: #e74c3c;
+        color: #e74c3c;
         border-bottom: 2px solid #c0392b;
       }
 
-      #scheduleButton:visited{
-        color:white;
-        text-decoration: none;
+
+      form{
+        display: flex;
+      }
+
+      input#todoBox{
+        height: 30px;
+        padding: 10px;
+        border: 0px;
+        border:3px solid #fcfcfc;
+        flex:1;
+      }
+
+      input#subButton{
+        width: 100px;
       }
 
     </style>
   </head>
   <body>
+    <a href="/schedule" id="scheduleButton" class="obutton"> Schedule </a>
     <div id="container">
-      <form method=post id="todoForm">
-        <input type="text" name="todo" id="todoBox"/>
-        <input type="submit" id="subButton"/>
-      </form>
+
+
       <div id="todos">
         <% if(user.todos) { %>
         <% user.todos.forEach(function(todo){ %>
@@ -80,8 +93,13 @@
         <% } %>
       </div>
 
+      <form method=post id="todoForm">
+        <input type="text" name="todo" id="todoBox"/>
+        <input type="submit" id="subButton"/ >
 
-      <a href="/schedule" id="scheduleButton"> Schedule </a>
+      </form>
+
+
     </div>
   </body>
 
