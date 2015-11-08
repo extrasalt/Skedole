@@ -33,7 +33,7 @@
 
             return;
           }
-          $.post("/updateTodos", {todos: todos});
+          $.post("/updateTodos", {todos: JSON.stringify(todos)});
           $("#name").text(todos.shift());
           $("#left").text(dgen());
           $("#right").text(dgen());

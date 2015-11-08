@@ -108,7 +108,8 @@ app.post("/todos", function(req, res){
 })
 
 app.post("/updateTodos", function(req, res){
-  var todos = req.body.todos.split;
+  var todos = JSON.parse(req.body.todos);
+
   User.update({email: req.session.email}, {todos: todos}, function(err, data){
     console.log(data);
   });
