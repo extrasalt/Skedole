@@ -19,6 +19,8 @@ app.use(session({
 app.use(cookieParser("hello"));
 app.use(bodyParser({extended: true}));
 
+app.use(express.static('public'));
+
 var OAuth2Client = google.auth.OAuth2;
 
 var authinfo = google.oauth2('v2');
@@ -61,9 +63,6 @@ app.get("/logout", function(req, res){
   res.redirect("/")
 })
 
-app.get("/", function(req, res){
-  res.render("index.ejs");
-})
 
 
 app.get("/oauthcallback", function(req, res){
