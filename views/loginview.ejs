@@ -6,14 +6,39 @@
   <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="style.css" charset="utf-8">
 </head>
+<style media="screen">
+  #logout{
+    font-family: 'PT Sans', sans-serif;
+    position: absolute;
+    top:2vw;
+    right:2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e74c3c;
+    height: 30px;
+    padding: 10px;
+    margin: auto;
+    width: auto;
+    border-radius: 3px;
+
+    text-decoration: none;
+    border-bottom: 2px solid #c0392b;
+    color: white;
+  }
+</style>
+
 <body>
   <div class="message">
     Logged in as <%= email %>
   </div>
   <div id="container">
-    <a href="/logout" id="gbutton">Logout</a>
+    <a href="/todos" id="gbutton">View Tasks</a>
 
   </div>
+
+  <div ><a href="/logout" id="logout">Logout</a></div>
 
 </body>
 </html>
