@@ -65,22 +65,40 @@
         border-bottom: 2px solid #c0392b;
       }
 
+      #subButton{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        background: #e74c3c;
+        height: 50px;
+        padding: 10px;
+        margin:auto;
+        text-align: center;
+        min-width: 50px;
+        width: auto;
+        border-radius: 3px;
+        color: white;
+        border:0px;
+        border-bottom: 2px solid #c0392b;
+        font-size:20pt;
+      }
 
       form{
         display: flex;
       }
 
       input#todoBox{
-        height: 30px;
+        height: 50px;
         padding: 10px;
         border: 0px;
         border:3px solid #fcfcfc;
         flex:1;
       }
 
-      input#subButton{
+      /*input#subButton{
         width: 100px;
-      }
+      }*/
 
     </style>
   </head>
@@ -100,7 +118,7 @@
 
       <form method=post id="todoForm">
         <input type="text" name="todo" id="todoBox"/>
-        <input type="submit" id="subButton" value="Add"/ >
+        <input type="submit" id="subButton" value="+"/ >
 
       </form>
 
