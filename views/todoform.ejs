@@ -109,8 +109,10 @@
         var summary = $("#todoForm #todoBox").val();
         $.post("/todos", {todo: summary}).done(function(data){
 
+          $("#todos").append("<div class='item'>"+summary+"</div>"); 
 
-            $("#container").html($(data).filter("#container").html());
+
+            //$("#todos").html($(data).filter("#container").filter("#todos").html());
         })
 
       })
