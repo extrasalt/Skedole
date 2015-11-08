@@ -103,12 +103,13 @@
         var name = $("#name").text();
         $.post("/schedule", {summary: name, datetime: date} )
         .done(function(){
+          $.post("/updateTodos", {todos: JSON.stringify(todos)});
           if(todos.length <= 0) {
             $('body').text("Amazing! Done!");
 
             return;
           }
-          $.post("/updateTodos", {todos: JSON.stringify(todos)});
+
           $("#name").hide().text(todos.shift()).fadeIn(600);
           $("#left").text(dgen());
           $("#right").text(dgen());
