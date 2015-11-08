@@ -106,7 +106,7 @@
         .done(function(){
           $.post("/updateTodos", {todos: JSON.stringify(todos)});
           if(todos.length <= 0) {
-            $('body').text("Amazing! Done!");
+            window.location = "/tasksdone.html";
 
             return;
           }
