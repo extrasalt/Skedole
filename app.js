@@ -79,12 +79,14 @@ app.get("/oauthcallback", function(req, res){
               console.log(err);
             }
             console.log("new user");
+            res.redirect("/todos");
           });
         } else {
 
-        console.log("old user")
-      }
-      res.redirect("/todos");
+          console.log("old user");
+          res.redirect("/todos");
+        }
+
 
       });
 
