@@ -76,9 +76,9 @@
 
     <div id="container">
       <% if(todos.length > 0) { %>
-      <div id="name"><%= todos.shift()%> </div>
-      <div class="option" id="left"><%=dgen()%></div>
-      <div class="option" id="right"><%=dgen()%></div>
+      <div id="name"></div>
+      <div class="option" id="left"></div>
+      <div class="option" id="right"></div>
       <% } else { %>
         <a href="/todos">Back</a>
         <p> Add tasks first! </p>
@@ -92,6 +92,9 @@
   <script type="text/javascript">
     var dgen = <%= dgen %>
     var todos = "<%= todos %>".split(",")
+    $("#name").hide().text(todos.shift()).fadeIn(600);
+    $("#left").text(dgen());
+    $("#right").text(dgen());
     $(function(){
       $(".option").click(function(){
         var date = new Date($(this).text());
