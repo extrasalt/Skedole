@@ -4,10 +4,13 @@
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <style media="screen">
       body{
         background: #e74c3c;
+        font-family: 'PT Sans', sans-serif;
       }
+    
 
 
 
@@ -30,11 +33,13 @@
       }
 
       .item{
+        color: #666;
         padding: 10px;
         padding-left: 30px;
         margin-top:10px;
         margin-bottom: 10px;
-        display: block;
+        display: flex;
+        align-items: center;
         width: auto;
         height: 30px;
         background: #fcfcfc;
@@ -47,12 +52,13 @@
         position: absolute;
         top:30px;
         right:30px;
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         text-decoration: none;
         background: white;
         height: 30px;
         padding: 10px;
-        text-align: center;
         width: 100px;
         border-radius: 3px;
         color: #e74c3c;
@@ -109,7 +115,7 @@
         var summary = $("#todoForm #todoBox").val();
         $.post("/todos", {todo: summary}).done(function(data){
 
-          $("#todos").append("<div class='item'>"+summary+"</div>"); 
+          $("#todos").append("<div class='item'>"+summary+"</div>");
 
 
             //$("#todos").html($(data).filter("#container").filter("#todos").html());
