@@ -52,7 +52,7 @@ app.get("/login", function(req, res){
     });
     res.redirect(url);
   } else {
-    res.send("Logged in as " + req.session.email);
+    res.render("loginview.ejs", {email: req.session.email});
   }
 });
 
@@ -62,7 +62,7 @@ app.get("/logout", function(req, res){
 })
 
 app.get("/", function(req, res){
-  res.send("placeholder");
+  res.render("index.ejs");
 })
 
 
