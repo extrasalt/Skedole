@@ -1,39 +1,82 @@
 <html>
-<head>
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
-  <style media="screen">
-    .option{
-      margin:0 0 0 0;
-      width: 49%;
-      height: 100%;
-      display: inline-block;
-    }
-
-    #left{
-      background: #d33;
-
-    }
-
-    #right{
-      background: #3d3;
-    }
+  <head>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <style media="screen">
+      #container{
+        display: flex;
+        height: 100%;
+      }
 
 
-  </style>
-  <title>
-    Schedule your tasks
-  </title>
+      .option{
+        height: 100%;
+        text-align: center;
+        color: white;
+        padding: 30px;
+      }
+      #name{
+        position: absolute;
+        padding: 30px;
+        background: white;
+        text-align: center;
+        width: 300px;
+        height: 100px;
+        margin: auto;
+        top: 0;
+        bottom:0;
+        left:0;
+        right:0;
+        border-radius: 5px;
+        box-shadow: 8px 10px 3px -5px rgba(0,0,0,0.25);
+
+      }
+
+      #name{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #left{
+        background: #e74c3c;
+        flex:1;
+
+      }
+      #left:active{
+        background: #d44c3c;
+      }
+
+      #right{
+        background: #1edd71;
+        flex:1;
+      }
+
+      #right:active{
+        background: #2ecc71;
+
+      }
+
+
+    </style>
+    <title>
+      Schedule your tasks
+    </title>
+  </head>
   <body>
-    <a href="/todos">Back</a>
-    <% if(todos.length > 0) { %>
-    <div id="name"><%= todos.shift()%> </div>
-    <div class="option" id="left"><%=dgen()%></div>
-    <div class="option" id="right"><%=dgen()%></div>
-    <% } else { %>
-      <p> Add tasks first! </p>
-    <% } %>
-  </body>
+
+    <div id="container">
+      <% if(todos.length > 0) { %>
+      <div id="name"><%= todos.shift()%> </div>
+      <div class="option" id="left"><%=dgen()%></div>
+      <div class="option" id="right"><%=dgen()%></div>
+      <% } else { %>
+        <a href="/todos">Back</a>
+        <p> Add tasks first! </p>
+      <% } %>
+    </div>
+
 
 
   <!-- Load only if todos is greater than zero! -->
@@ -61,9 +104,8 @@
         })
 
       })
-
     })
   </script>
   <% } %>
-</head>
+</body>
 </html>
